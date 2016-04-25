@@ -21,7 +21,23 @@ def ShortRank(rank):
         return 'A'
     else:
         return rank
-    
+
+def Rank2Number(rank):
+    i_rank=0
+    if rank[0].upper() =='J':
+        i_rank=11
+    elif rank[0].upper() =='Q':
+        i_rank=11
+    elif rank[0].upper() =='K':
+        i_rank=11
+    elif rank[0].upper() =='A':
+        i_rank=11
+    elif rank[0].upper() =='1':
+        i_rank=10
+    else:
+        i_rank=int(rank)
+    return i_rank
+
 def RankName(i_rank):
     rank=ShortRank(i_rank)
     if rank[0].upper() =='J':
