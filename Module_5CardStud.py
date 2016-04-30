@@ -6,6 +6,21 @@ Developed by Robin Li robinli@live.
 
 Assume the hand is sorted before evaluation.
 """
+def Rank2Number(rank):
+    i_rank=0
+    if rank[0].upper() =='J':
+        i_rank=11
+    elif rank[0].upper() =='Q':
+        i_rank=12
+    elif rank[0].upper() =='K':
+        i_rank=13
+    elif rank[0].upper() =='A':
+        i_rank=14
+    elif rank[0].upper() =='1':
+        i_rank=10
+    else:
+        i_rank=int(rank)
+    return i_rank
 
 ## Any two cards of same rank
 def IfOnePair(hand):
@@ -31,7 +46,7 @@ def IfTwoPair(hand):
             return True
         else:
             return False
-    elif (hand[1][0]==hand[2][0] and (hand[3][0]==hand[4][0]):
+    elif (hand[1][0]==hand[2][0] and hand[3][0]==hand[4][0]):
         return True
     else:
         return False
@@ -64,11 +79,13 @@ def If3ofAKind(hand):
 
 ## Any five consecutive cards of different suits
 def IfStraight(hand):
-    if (hand[1][0]==hand[0][0]+1 and hand[2][0]==hand[1][0])+1 and \
-        hand[3][0]==hand[2][0]+1 and hand[4][0]==hand[3][0]+1): 
+    if (Rank2Number(hand[1][0])==Rank2Number(hand[0][0])+1 and \
+        Rank2Number(hand[2][0])==Rank2Number(hand[1][0])+1 and \
+        Rank2Number(hand[3][0])==Rank2Number(hand[2][0])+1 and \
+        Rank2Number(hand[4][0])==Rank2Number(hand[3][0])+1): 
         return True
-    elif (hand[0][0]==hand[1][0] and hand[2][0]==hand[3][0] and \
-        hand[2][0]==hand[4][0]):
+    elif (hand[0][0]=="2" and hand[1][0]=="3" and hand[2][0]=="4" and \
+          hand[3][0]=="5" and hand[4][0]=="A"):
         return True
     else:
         return False
@@ -84,7 +101,7 @@ def IfFlush(hand):
 
 ## Any three of same rank together any two cards of same rank
 def IfFullHouse(hand):
-    if (hand[0][0]==hand[1][0] and hand[0][0]==hand[2][0]) and \
+    if (hand[0][0]==hand[1][0] and hand[0][0]==hand[2][0] and \
         hand[3][0]==hand[4][0]): 
         return True
     elif (hand[0][0]==hand[1][0] and hand[2][0]==hand[3][0] and \
@@ -96,7 +113,7 @@ def IfFullHouse(hand):
 
 ## Any four cards of the same rank
 def If4ofAKind(hand):
-    if (hand[0][0]==hand[1][0] and hand[0][0]==hand[2][0]) and \
+    if (hand[0][0]==hand[1][0] and hand[0][0]==hand[2][0] and \
         hand[0][0]==hand[3][0]): 
         return True
     elif (hand[1][0]==hand[2][0] and hand[1][0]==hand[3][0] and \
@@ -107,11 +124,8 @@ def If4ofAKind(hand):
 
 ## Any Straight with all five cards of same suit
 def IfStraightFlush(hand):
-    if (IfFlush(hand)):
-        if (IfStraight(hand)): 
-            return True
-        else:
-            return False
+    if (IfFlush(hand) and IfStraight(hand)): 
+        return True
     else:
         return False
 

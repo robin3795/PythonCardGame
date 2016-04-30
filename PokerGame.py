@@ -34,7 +34,7 @@ def main():
             name_dict[card_short]=card_full
             value_dict[card_short]=i
             i=i+1
-    print (len(deck)," cards in the deck ",deck," now.\n\n")
+    ##print (len(deck)," cards in the deck ",deck," now.\n\n")
     Module_Basic.ShuffleDeck(deck)
     
     menu_display()
