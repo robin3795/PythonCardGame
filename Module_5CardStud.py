@@ -135,11 +135,12 @@ def If4ofAKind(hand):
 ## Any Straight with all five cards of same suit
 def IfStraightFlush(hand):
     max=hand[-1]
-    msg="Four of A Kind"
-    if (IfFlush(hand) and IfStraight(hand)): 
+    msg="Straight Flush"
+    if (IfFlush(hand)==5 and IfStraight(hand)==4): 
         rank=8
     else:
         rank=0
+    print (rank,"\n")
     return (rank,max,msg)
 
 ## Evaluate the hand

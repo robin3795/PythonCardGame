@@ -36,70 +36,74 @@ def main():
             i=i+1
     ##print (len(deck)," cards in the deck ",deck," now.\n\n")
     Module_Basic.ShuffleDeck(deck)
+
     
     menu_display()
+    exit_index="a"
+    while (exit_index!="E"):
+        
 #Antes:Each player must place a forced bet, the ante, before the cards are dealt. 
 #Starting hand: the hole card
-    Module_Basic.DrawCard(deck,Hand_A)
-    Module_Basic.DrawCard(deck,Hand_B)
+        Module_Basic.DrawCard(deck,Hand_A)
+        Module_Basic.DrawCard(deck,Hand_B)
 # Door card and first betting round
-    Module_Basic.DrawCard(deck,Hand_A)
-    print ("Player A has: ",Hand_A[1:],"\n")
-    Module_Basic.DrawCard(deck,Hand_B)
-    print ("Player B has: ",Hand_B[1:],"\n")
-    #Actions: Fold, Call, Raise
+        Module_Basic.DrawCard(deck,Hand_A)
+        print ("Player A has: ",Hand_A[1:],"\n")
+        Module_Basic.DrawCard(deck,Hand_B)
+        print ("Player B has: ",Hand_B[1:],"\n")
+#Actions: Fold, Call, Raise
 #3rd street and second betting round
-    Module_Basic.DrawCard(deck,Hand_A)
-    print ("Player A has: ",Hand_A[1:],"\n")
-    Module_Basic.DrawCard(deck,Hand_B)
-    print ("Player B has: ",Hand_B[1:],"\n")
-    #Actions: Fold, Call, Raise
+        Module_Basic.DrawCard(deck,Hand_A)
+        print ("Player A has: ",Hand_A[1:],"\n")
+        Module_Basic.DrawCard(deck,Hand_B)
+        print ("Player B has: ",Hand_B[1:],"\n")
+#Actions: Fold, Call, Raise
 #4th street and third betting round
-    Module_Basic.DrawCard(deck,Hand_A)
-    print ("Player A has: ",Hand_A[1:],"\n")
-    Module_Basic.DrawCard(deck,Hand_B)
-    print ("Player B has: ",Hand_B[1:],"\n")
-    #Actions: Fold, Call, Raise
+        Module_Basic.DrawCard(deck,Hand_A)
+        print ("Player A has: ",Hand_A[1:],"\n")
+        Module_Basic.DrawCard(deck,Hand_B)
+        print ("Player B has: ",Hand_B[1:],"\n")
+#Actions: Fold, Call, Raise
 #5th street and fourth betting round
-    Module_Basic.DrawCard(deck,Hand_A)
-    print ("Player A has: ",Hand_A[1:],"\n")
-    Module_Basic.DrawCard(deck,Hand_B)
-    print ("Player B has: ",Hand_B[1:],"\n")
-    #Actions: Fold, Call, Raise
+        Module_Basic.DrawCard(deck,Hand_A)
+        print ("Player A has: ",Hand_A[1:],"\n")
+        Module_Basic.DrawCard(deck,Hand_B)
+        print ("Player B has: ",Hand_B[1:],"\n")
+#Actions: Fold, Call, Raise
 
 ###Test Hand
-##    Hand_A=["AS","3S","2S","5S","4S"]
-##    Hand_B=["AC","3C","2C","5C","4C"]
-
+##      Hand_A=["AS","3S","2S","5S","4S"]
+##      Hand_B=["AC","3C","2C","5C","4C"]
 
 # Sort all hands before comparing
-    Sorted_Hand_A=sorted(Hand_A, key=value_dict.get)
-    Sorted_Hand_B=sorted(Hand_B, key=value_dict.get)
-    print (Sorted_Hand_A,"\n")
-    print (Sorted_Hand_B,"\n")
+        Sorted_Hand_A=sorted(Hand_A, key=value_dict.get)
+        Sorted_Hand_B=sorted(Hand_B, key=value_dict.get)
+        print (Sorted_Hand_A,"\n")
+        print (Sorted_Hand_B,"\n")
 
 # Showdown
-    Hand_A_value=Module_5CardStud.EvaluateHand(Sorted_Hand_A)
-    Hand_B_value=Module_5CardStud.EvaluateHand(Sorted_Hand_B)
-    print ("A: ",Hand_A," vs B:",Hand_B, "\n")
-    if (Hand_A_value[0]==Hand_B_value[0]):
-        print ("Both got ", Hand_A_value[2]," but ")
-        print ("A: ",name_dict[Hand_A_value[1]],"vs B: ",name_dict[Hand_B_value[1]],"\n")
-        if(value_dict[Hand_A_value[1]]>value_dict[Hand_B_value[1]]):
-            print ("A wins. \n\n")
+        Hand_A_value=Module_5CardStud.EvaluateHand(Sorted_Hand_A)
+        Hand_B_value=Module_5CardStud.EvaluateHand(Sorted_Hand_B)
+        print ("A: ",Hand_A," vs B:",Hand_B, "\n")
+        if (Hand_A_value[0]==Hand_B_value[0]):
+            print ("Both got ", Hand_A_value[2]," but ")
+            print ("A: ",name_dict[Hand_A_value[1]],"vs B: ",name_dict[Hand_B_value[1]],"\n")
+            if(value_dict[Hand_A_value[1]]>value_dict[Hand_B_value[1]]):
+                print ("A wins. \n\n")
+            else:
+                print ("B Wins. \n\n")
         else:
-            print ("B Wins. \n\n")
-    else:
-        print ("A ",Hand_A_value[2],"vs B ",Hand_B_value[2],"\n")
-        if (Hand_A_value[0]>Hand_B_value[0]):
-            print ("A Wins. \n\n")
-        else:
-            print ("B Wins. \n\n")
+            print ("A ",Hand_A_value[2],"vs B ",Hand_B_value[2],"\n")
+            if (Hand_A_value[0]>Hand_B_value[0]):
+                print ("A Wins. \n\n")
+            else:
+                print ("B Wins. \n\n")
 
 #Reset the deck
-    Module_Basic.MergeDeck(deck,Hand_A) 
-    Module_Basic.MergeDeck(deck,Hand_B)
-    Module_Basic.ShuffleDeck(deck)    
-    
+        Module_Basic.MergeDeck(deck,Hand_A) 
+        Module_Basic.MergeDeck(deck,Hand_B)
+        Module_Basic.ShuffleDeck(deck)    
+        exit_index=input("Press e Exit or Enter key to continue! \n").upper()
+
 if __name__ == "__main__":
     main()
