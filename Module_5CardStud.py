@@ -24,140 +24,142 @@ def Rank2Number(rank):
 
 ## Any two cards of same rank
 def IfOnePair(hand):
+    msg="One Pair"
+    max=hand[-1]
     if (hand[0][0]==hand[1][0]):
-        return True
+        rank=1
+        max=hand[1]
     elif (hand[1][0]==hand[2][0]):
-        return True
+        rank=1
+        max=hand[2]
     elif (hand[2][0]==hand[3][0]):
-        return True
+        rank=1
+        max=hand[3]
     elif (hand[3][0]==hand[4][0]):
-        return True
+        rank=1
     else:
-        return False
+        rank=0
+    return (rank,max,msg)
 
 ## Any two cards of same rank together with another two cards od same rank
 def IfTwoPair(hand):
+    msg="Three of A Kind"
+    max=hand[-1]
     if (hand[0][0]==hand[1][0]):
         if (hand[2][0]==hand[3][0]):
-            return True
-        elif (hand[2][0]==hand[4][0]):
-            return True
+            rank=2
+            max=hand[3]
         elif (hand[3][0]==hand[4][0]):
-            return True
+            rank=2
         else:
-            return False
+            rank=0
     elif (hand[1][0]==hand[2][0] and hand[3][0]==hand[4][0]):
-        return True
+        rank=2
     else:
-        return False
+        rank=0
+    return (rank,max,msg)
 
 ## Any three cards of the same rank
 def If3ofAKind(hand):
-    if (hand[0][0]==hand[1][0]):
-        if (hand[0][0]==hand[2][0]):
-            return True
-        elif (hand[0][0]==hand[3][0]):
-            return True
-        elif (hand[0][0]==hand[4][0]):
-            return True
-        else:
-            return False
-    elif (hand[1][0]==hand[2][0]):
-        if (hand[1][0]==hand[3][0]):
-            return True
-        elif (hand[1][0]==hand[4][0]):
-            return True
-        else:
-            return False
-    elif (hand[2][0]==hand[3][0]):
-        if (hand[2][0]==hand[4][0]):
-            return True
-        else:
-            return False
+    msg="Three of A Kind"
+    max=hand[-1]
+    if (hand[0][0]==hand[1][0] and hand[0][0]==hand[2][0]):
+        rank=3
+        max=hand[2]
+    elif (hand[1][0]==hand[2][0] and hand[1][0]==hand[3][0]):
+        rank=3
+        max=hand[3]
+    elif (hand[2][0]==hand[3][0] and hand[2][0]==hand[4][0]):
+        rank=3
     else:
-        return False
+        rank=0
+    return (rank,max,msg)
 
 ## Any five consecutive cards of different suits
 def IfStraight(hand):
+    msg="Straight"
+    max=hand[-1]
     if (Rank2Number(hand[1][0])==Rank2Number(hand[0][0])+1 and \
         Rank2Number(hand[2][0])==Rank2Number(hand[1][0])+1 and \
         Rank2Number(hand[3][0])==Rank2Number(hand[2][0])+1 and \
         Rank2Number(hand[4][0])==Rank2Number(hand[3][0])+1): 
-        return True
+        rank=4
     elif (hand[0][0]=="2" and hand[1][0]=="3" and hand[2][0]=="4" and \
           hand[3][0]=="5" and hand[4][0]=="A"):
-        return True
+        rank=4
+        max=hand[3]
     else:
-        return False
-    return
+        rank=0
+    return (rank,max,msg)
 
 ## Any five cards of same suit (not consecutive)
 def IfFlush(hand):
+    msg="Flush"
+    max=hand[-1]
     if (hand[0][-1]==hand[1][-1] and hand[0][-1]==hand[2][-1] and \
         hand[0][-1]==hand[3][-1] and hand[0][-1]==hand[4][-1]):
-        return True
+        rank=5
     else:
-        return False
+        rank=0
+    return (rank,max,msg)
 
 ## Any three of same rank together any two cards of same rank
 def IfFullHouse(hand):
+    msg="Full House"
+    max=hand[-1]
     if (hand[0][0]==hand[1][0] and hand[0][0]==hand[2][0] and \
         hand[3][0]==hand[4][0]): 
-        return True
+        rank=6
+        max=hand[2]
     elif (hand[0][0]==hand[1][0] and hand[2][0]==hand[3][0] and \
         hand[2][0]==hand[4][0]):
-        return True
+        rank=6
     else:
-        return False
-    return
+        rank=0
+    return (rank,max,msg)
 
 ## Any four cards of the same rank
 def If4ofAKind(hand):
+    max=hand[1]
+    msg="Four of A Kind"
     if (hand[0][0]==hand[1][0] and hand[0][0]==hand[2][0] and \
         hand[0][0]==hand[3][0]): 
-        return True
+        rank=7
     elif (hand[1][0]==hand[2][0] and hand[1][0]==hand[3][0] and \
         hand[1][0]==hand[4][0]):
-        return True
+        rank=7
     else:
-        return False
+        rank=0
+    return (rank,max,msg)
 
 ## Any Straight with all five cards of same suit
 def IfStraightFlush(hand):
+    max=hand[-1]
+    msg="Four of A Kind"
     if (IfFlush(hand) and IfStraight(hand)): 
-        return True
+        rank=8
     else:
-        return False
+        rank=0
+    return (rank,max,msg)
 
 ## Evaluate the hand
 def EvaluateHand(hand):
-    max=hand[-1]
-    msg=" Card Rank Message"
-    if (IfStraightFlush(hand)):
-        rank=8
-        msg="Straight Flush"
-    elif (If4ofAKind(hand)):
-        rank=7
-        msg="Four of A Kind"
-    elif (IfFullHouse(hand)):
-        rank=6
-        msg="Full House"
-    elif (IfFlush(hand)):
-        rank=5
-        msg="Flush"
-    elif (IfStraight(hand)):
-        rank=4
-        msg="Straight"
-    elif (If3ofAKind(hand)):
-        rank=3
-        msg="Three of A Kind"
-    elif (IfTwoPair(hand)):
-        rank=2
-        msg="Two Pair"
-    elif  (IfOnePair(hand)):
-        rank=1
-        msg="One Pair"
+    if (IfStraightFlush(hand)[0]==8):
+        hand_value=IfStraightFlush(hand)
+    elif (If4ofAKind(hand)[0]==7):
+        hand_value=If4ofAKind(hand)
+    elif (IfFullHouse(hand)[0]==6):
+        hand_value=IfFullHouse(hand)
+    elif (IfFlush(hand)[0]==5):
+        hand_value=IfFlush(hand)
+    elif (IfStraight(hand)[0]==4):
+        hand_value=IfStraight(hand)
+    elif (If3ofAKind(hand)[0]==3):
+        hand_value=If3ofAKind(hand)
+    elif (IfTwoPair(hand)[0]==2):
+        hand_value=IfTwoPair(hand)
+    elif (IfOnePair(hand)[0]==1):
+        hand_value=IfOnePair(hand)
     else:
-        rank=0
-        msg="High Card"
-    return (rank,max,msg)
+        hand_value=(0,hand[-1],"High Card")
+    return hand_value
