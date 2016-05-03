@@ -43,7 +43,7 @@ def IfOnePair(hand):
 
 ## Any two cards of same rank together with another two cards od same rank
 def IfTwoPair(hand):
-    msg="Three of A Kind"
+    msg="Two Pair"
     max=hand[-1]
     if (hand[0][0]==hand[1][0]):
         if (hand[2][0]==hand[3][0]):
@@ -140,7 +140,6 @@ def IfStraightFlush(hand):
         rank=8
     else:
         rank=0
-    print (rank,"\n")
     return (rank,max,msg)
 
 ## Evaluate the hand
