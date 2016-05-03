@@ -67,9 +67,9 @@ def main():
     print ("Player B has: ",Hand_B[1:],"\n")
     #Actions: Fold, Call, Raise
 
-#Test Hand
-    Hand_A=["AS","3S","2S","5S","4S"]
-    Hand_B=["AC","3C","2C","5C","4C"]
+###Test Hand
+##    Hand_A=["AS","3S","2S","5S","4S"]
+##    Hand_B=["AC","3C","2C","5C","4C"]
 
 
 # Sort all hands before comparing
